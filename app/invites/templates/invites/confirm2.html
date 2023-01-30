@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm</title>
+</head>
+<body>
+
+  <h1>Hola, {{ invite.name }}</h1>
+  <h2>Confirma tu asistencia</h2>
+
+  <h3>Mesa asignada: {{ invite.table }}</h3>
+  <form method="POST">
+    <!-- <label for="invite_name"></label>
+    <input type="text" name="invite_name" id="invite_name"> -->
+    <label for="total_confirmed">Invitaciones</label>
+    <input type="number" name="total_confirmed" id="total_confirmed" min="1" max="{{ invite.num_invitations }}" step="1" value="{{ invite.num_invitations }}">
+    <button type="submit">Confirmar!</button>
+  </form>
+
+</body>
+</html>

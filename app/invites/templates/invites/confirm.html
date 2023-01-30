@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact V10</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/images/icons/favicon.ico"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/bootstrap/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/animate/animate.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/css-hamburgers/hamburgers.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/animsition/css/animsition.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/select2/select2.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/daterangepicker/daterangepicker.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://colorlib.com/etc/cf/ContactFrom_v10/css/util.css"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/cf/ContactFrom_v10/css/main.css"> -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'invites/main.css' %}"
+    />
+
+    <meta name="robots" content="noindex, follow" />
+
+    <style>
+      .title1 {
+        color: #8c6a3b;
+      }
+      .btn-bg {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-contact100">
+      <div class="wrap-contact100">
+        <form class="contact100-form validate-form" method="POST">
+          {% csrf_token %}
+          <span class="contact100-form-title title1"> Hola, {{ invite.name }} </span>
+          <div class="alert alert-info">
+            {% if invite.confirmed is True %}
+              Asistencia confirmada
+            {% elif invite.confirmed is False %}
+              Asistencia: no asistiré
+            {% else %}
+              No asistiré
+            {% endif %}
+          </div>
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Número de mesa asigando"
+          >
+            <input
+              class="input100"
+              type="text"
+              name="table"
+              placeholder="Mesa"
+              value="Mesa: {{ invite.table }}"
+              disabled
+            />
+            <span class="focus-input100"></span>
+          </div>
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Por favor ingrese cantidad de reservaciones"
+          >
+            <label for="total_confirmed" class="input100">Invitados:</label>
+            <input
+              class="input100"
+              type="number"
+              name="total_confirmed"
+              id="total_confirmed"
+              placeholder="Confirmados"
+              min="1"
+              max="{{ invite.num_invitations }}"
+              value="{{ invite.num_invitations }}"
+            />
+            <span class="focus-input100"></span>
+          </div>
+          {% if invite.confirmed is None %}
+          <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn" type="submit">
+              <span>
+                <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+                Asistiré
+              </span>
+            </button>
+            <hr>
+            <a
+              href="{% url 'invites:decline' invite_id %}"
+              class="contact100-form-btn ml-3"
+              style="color: red;"
+            >
+              <span>
+                <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+                No Asistiré
+              </span>
+            </a>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/animsition/js/animsition.min.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/bootstrap/js/popper.js"></script>
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/select2/select2.min.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/daterangepicker/moment.min.js"></script>
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/daterangepicker/daterangepicker.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/vendor/countdowntime/countdowntime.js"></script>
+
+    <script src="https://colorlib.com/etc/cf/ContactFrom_v10/js/main.js"></script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
+    <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79188ae7a9bddec7","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script> -->
+  </body>
+</html>

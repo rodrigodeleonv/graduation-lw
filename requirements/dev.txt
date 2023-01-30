@@ -1,0 +1,5 @@
+-i https://pypi.org/simple
+flake8==6.0.0
+mccabe==0.7.0 ; python_version >= '3.6'
+pycodestyle==2.10.0 ; python_version >= '3.6'
+pyflakes==3.0.1 ; python_version >= '3.6'
