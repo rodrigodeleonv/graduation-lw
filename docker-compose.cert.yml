@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+
+  web:
+    # ports:
+    #   - 8080:8000
+    #   - 8000:8000
+    expose:
+      - 8000
+    build: .
+    command: gunicorn proj.wsgi --bind 0.0.0.0:8000
+    env_file:
+      - .env
+    volumes:
+      - static_data:/static_data
+    networks:
+      - net100
+
+  proxy:
+    image: nginx:latest
+    ports:
+    - 80:80
+    depends_on:
+      - web
+    volumes:
+      - ./etc/nginx/templates-initiate:/etc/nginx/templates
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/data:/var/www/certbot
+    networks:
+      - net100
+
+  certbot:
+    image: certbot/certbot
+    command: >-
+      certonly --reinstall --webroot -w /var/www/certbot
+      --email ${EMAIL}
+      -d ${DOMAIN}
+      --agree-tos --no-eff-email
+    volumes:
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/data:/var/www/certbot
+    env_file:
+      - .env
+    depends_on:
+      - proxy
+
+volumes:
+  static_data:
+  # cerbot_conf:
+  # cerbot_www:
+
+
+networks:
+  net100: {}
