@@ -47,9 +47,6 @@ services:
 
 volumes:
   static_data:
-  # cerbot_conf:
-  # cerbot_www:
-
 
 networks:
   net100: {}
