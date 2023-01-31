@@ -27,6 +27,7 @@ services:
       - .env
     volumes:
       - static_data:/static_data
+      - ./data_sqlite:/data
     networks:
       - net100
 

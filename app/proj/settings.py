@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from decouple import config
 from pathlib import Path
 
+PRODUCTION = config('PRODUCTION', cast=bool)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,10 +79,16 @@ WSGI_APPLICATION = 'proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+DB_FILENAME = (
+    '/data/db.sqlite3' if PRODUCTION else BASE_DIR / 'db.sqlite3'
+)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': config('', defaul=BASE_DIR / 'db.sqlite3'),
+        'NAME': DB_FILENAME
     }
 }
 
@@ -127,3 +135,8 @@ STATIC_ROOT = '/static_data'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print('---')
+print(f'PRODUCTION: {PRODUCTION}')
+print(f'DB_FILENAME: {DB_FILENAME}')
+print('---\n')
