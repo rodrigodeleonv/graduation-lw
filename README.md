@@ -1,2 +1,7 @@
 # graduation-lw
-Site to confirm invitations
+
+Generate cert
+
+```bash
+docker-compose -f docker-compose.cert.yml up certbot
+```
