@@ -84,16 +84,16 @@
         <form class="contact100-form validate-form" method="POST">
           {% csrf_token %}
           <span class="contact100-form-title title1"> Hola, {{ invite.name }} </span>
-          <div class="alert alert-info">
-            {% if invite.confirmed is True %}
-              Asistencia confirmada
-            {% elif invite.confirmed is False %}
-              Asistencia: no asistiré
-            {% else %}
-              No asistiré
-            {% endif %}
-          </div>
-          <div
+
+          {% if invite.confirmed is True %}
+          <div class="alert alert-info" style="text-align: center;">Asistencia confirmada</div>
+          {% elif invite.confirmed is False %}
+          <div class="alert alert-warning" style="text-align: center;">Asistencia: no asistiré</div>
+          {% endif %}
+
+          <div  style="text-align: center;"> Mesa asignada: {{ invite.table }} </div>
+
+          <!-- <div
             class="wrap-input100 validate-input"
             data-validate="Número de mesa asigando"
           >
@@ -106,24 +106,8 @@
               disabled
             />
             <span class="focus-input100"></span>
-          </div>
-          <div
-            class="wrap-input100 validate-input"
-            data-validate="Por favor ingrese cantidad de reservaciones"
-          >
-            <label for="total_confirmed" class="input100">Invitados:</label>
-            <input
-              class="input100"
-              type="number"
-              name="total_confirmed"
-              id="total_confirmed"
-              placeholder="Confirmados"
-              min="1"
-              max="{{ invite.num_invitations }}"
-              value="{{ invite.num_invitations }}"
-            />
-            <span class="focus-input100"></span>
-          </div>
+          </div> -->
+
           {% if invite.confirmed is None %}
           <div class="container-contact100-form-btn">
             <button class="contact100-form-btn" type="submit">
