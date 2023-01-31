@@ -31,6 +31,11 @@ ALLOWED_HOSTS = config(
     'DJANGO_ALLOWED_HOSTS',
     cast=lambda v: [s.strip() for s in v.split(',')]
 )
+CSRF_TRUSTED_ORIGINS = config(
+    'DJANGO_CSRF_TRUSTED_ORIGINS',
+    cast=lambda v: [s.strip() for s in v.split(',')],
+    default=''
+)
 
 
 # Application definition
@@ -139,4 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 print('---')
 print(f'PRODUCTION: {PRODUCTION}')
 print(f'DB_FILENAME: {DB_FILENAME}')
+print(f'DEBUG: {DEBUG}')
+print(f'ALLOWED_HOSTS: {ALLOWED_HOSTS}')
+print(f'CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}')
 print('---\n')
