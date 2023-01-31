@@ -174,3 +174,4 @@ poetry.toml
 Pipfile.lock
 **settings.json
 **/.tmp
+.vscode/sftp.json
