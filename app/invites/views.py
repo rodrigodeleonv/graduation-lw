@@ -63,7 +63,7 @@ class ListInvitationView(View):
             relative = reverse(
                 'invites:confirm', kwargs={'uuid': invite.id}
             )
-            uri = f"{URL_BASE}/{relative}"
+            uri = f"{URL_BASE}{relative}"
             uris.append({'name': invite.name, 'url': uri})
         print(relative)
         context = {'invite_urls': uris}
