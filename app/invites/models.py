@@ -15,7 +15,7 @@ class Invite(models.Model):
     total_confirmed = models.SmallIntegerField(default=0)
     total_requests = models.IntegerField(default=0)
     table = models.SmallIntegerField(null=True)
-    confirm_date = models.DateTimeField(null=True)
+    confirm_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
