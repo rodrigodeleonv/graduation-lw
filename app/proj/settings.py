@@ -142,9 +142,9 @@ STATIC_ROOT = '/static_data'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 print('---')
-print(f'PRODUCTION: {PRODUCTION}')
-print(f'DB_FILENAME: {DB_FILENAME}')
-print(f'DEBUG: {DEBUG}')
-print(f'ALLOWED_HOSTS: {ALLOWED_HOSTS}')
-print(f'CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}')
+print(f'PRODUCTION: {PRODUCTION}', flush=True)
+print(f'DB_FILENAME: {DB_FILENAME}', flush=True)
+print(f'DEBUG: {DEBUG}', flush=True)
+print(f'ALLOWED_HOSTS: {ALLOWED_HOSTS}', flush=True)
+print(f'CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}', flush=True)
 print('---\n')

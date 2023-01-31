@@ -1,6 +1,7 @@
 from django.utils import timezone
 
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpRequest, HttpResponse
 from django.views import View
 from django.db.models import F
@@ -45,3 +46,26 @@ class DeclineInvitation(View):
 
 class ConfirmCompletedView(View):
     pass
+
+
+class ListInvitationView(View):
+    def get(self, request: HttpRequest):
+        # print(request.META)
+        # breakpoint()
+        URL_BASE = (
+            f"{request.META['wsgi.url_scheme']}://"
+            f"{request.META['HTTP_HOST']}"
+        )
+        print(URL_BASE)
+        uris = []
+        invites = Invite.objects.all()
+        for invite in invites:
+            relative = reverse(
+                'invites:confirm', kwargs={'uuid': invite.id}
+            )
+            uri = f"{URL_BASE}/{relative}"
+            uris.append({'name': invite.name, 'url': uri})
+        print(relative)
+        context = {'invite_urls': uris}
+        return render(request, 'invites/list.html', context)
+        # return HttpResponse(f'List: {uris}')

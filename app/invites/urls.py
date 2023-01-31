@@ -20,4 +20,9 @@ urlpatterns = [
         views.DeclineInvitation.as_view(),
         name='decline'
     ),
+    path(
+        'list/',
+        views.ListInvitationView.as_view(),
+        name='list'
+    ),
 ]
