@@ -19,9 +19,6 @@ services:
       - .env
 
   web:
-    # ports:
-    #   - 8080:8000
-    #   - 8000:8000
     expose:
       - 8000
     build: .
@@ -33,20 +30,17 @@ services:
     networks:
       - net100
 
-  certbot:
-    image: certbot/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    env_file:
-      - .env
+  # certbot:
+  #   image: certbot/certbot
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email {email} -d {domain} --agree-tos
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   env_file:
+  #     - .env
 
 volumes:
   static_data:
-  # cerbot_conf:
-  # cerbot_www:
-
 
 networks:
   net100: {}

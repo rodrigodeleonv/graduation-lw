@@ -39,10 +39,3 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
-
-server {
-
-    ssl_certificate /etc/ssl/certs/star_ciberc_com.pem;
-    ssl_certificate_key /etc/ssl/private/cibercrecords.key;
-    ssl_dhparam /etc/ssl/certs/ssl-dhparam.pem; # optional
-}
