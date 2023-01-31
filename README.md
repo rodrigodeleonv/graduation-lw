@@ -1,9 +1,11 @@
 # graduation-lw
 
-Generate cert
-
 ```bash
+# Generate cert
 docker-compose -f docker-compose.cert.yml up certbot
+
+# Start application
+sudo docker-compose up -d --build
 ```
 
 ## How to cert nginx
